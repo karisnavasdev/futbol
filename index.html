@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$futbol | WorldCup Token 2026</title>
+  <meta name="description" content="$futbol is a community-driven Solana meme token built around the energy, hype, and global unity of the 2026 futbol." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #050b3d;
+      --blue: #0067c7;
+      --green: #00a651;
+      --red: #e31837;
+      --gold: #ffbd20;
+      --white: #ffffff;
+      --muted: #dce5ff;
+      --glass: rgba(255,255,255,.10);
+      --border: rgba(255,255,255,.18);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-anchor: none; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(0,103,199,.55), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(227,24,55,.45), transparent 25%),
+        radial-gradient(circle at 50% 90%, rgba(0,166,81,.45), transparent 30%),
+        linear-gradient(135deg, #02051f 0%, #08175c 52%, #02051f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    .ticker-tape {
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(90deg, var(--green), var(--blue), var(--red));
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      font-weight: 800;
+      letter-spacing: .08em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 34px;
+      width: max-content;
+      padding: 10px 0;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(2,5,31,.72);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; }
+    .brand img { width: 48px; height: 48px; border-radius: 50%; object-fit: contain; background: #fff; border: 2px solid rgba(255,255,255,.9); padding: 4px; flex-shrink: 0; }
+    .brand span { font-family: Anton, sans-serif; font-size: 28px; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 800; color: var(--muted); }
+    .nav-links a:hover { color: #fff; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      color: white;
+      font-weight: 800;
+      transition: .2s ease;
+      cursor: pointer;
+      box-shadow: 0 18px 48px rgba(0,0,0,.18);
+    }
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.17); }
+    .btn.primary { background: linear-gradient(135deg, var(--gold), #ff8a00); color: #07103f; border: 0; }
+    .btn.green { background: linear-gradient(135deg, var(--green), #00db76); color: #021b10; border: 0; }
+    .btn.red { background: linear-gradient(135deg, var(--red), #ff5b72); border: 0; }
+
+    .hero {
+      position: relative;
+      padding: 88px 0 54px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.11);
+      border: 1px solid var(--border);
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .12em;
+    }
+    .pulse { width: 10px; height: 10px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 8px rgba(0,166,81,.15); }
+    h1 {
+      margin: 24px 0 18px;
+      font-family: Anton, sans-serif;
+      font-size: clamp(54px, 9vw, 112px);
+      line-height: .92;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--gold), #fff, var(--green), var(--blue), var(--red));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.55;
+      color: #e9eeff;
+      margin: 0 0 28px;
+      max-width: 710px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 13px; margin-bottom: 24px; }
+    .ca-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      max-width: 720px;
+      padding: 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .ca-box small { display: block; color: var(--muted); font-weight: 800; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .11em; }
+    .ca { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #fff; word-break: break-all; font-size: 14px; }
+
+    .mascot-card {
+      position: relative;
+      isolation: isolate;
+      padding: 26px;
+      border-radius: 42px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+      border: 1px solid var(--border);
+      box-shadow: 0 35px 100px rgba(0,0,0,.38);
+      transform: rotate(1deg);
+    }
+    .mascot-card:before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      z-index: -1;
+      border-radius: 45px;
+      background: conic-gradient(from 160deg, var(--gold), var(--green), var(--blue), var(--red), var(--gold));
+      filter: blur(18px);
+      opacity: .55;
+    }
+    .mascot-card img {
+      display: block;
+      width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      border-radius: 32px;
+      background: white;
+      padding: 24px;
+    }
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .mini-stat {
+      padding: 15px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.13);
+      text-align: center;
+      font-weight: 800;
+    }
+    .mini-stat span { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 5px; }
+    .legacy-box {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255,189,32,.20), rgba(255,255,255,.08));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .legacy-box h4 {
+      margin: 0 0 8px;
+      font-family: Anton, sans-serif;
+      font-size: 28px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .legacy-box p {
+      margin: 0 0 14px;
+      color: #e9eeff;
+      line-height: 1.5;
+    }
+    .legacy-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+    }
+    .legacy-item {
+      padding: 13px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      text-align: center;
+    }
+    .legacy-item strong {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .legacy-item span {
+      display: block;
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .section { padding: 72px 0; }
+    .section-title { max-width: 820px; margin: 0 auto 34px; text-align: center; }
+    .section-title h2 { font-family: Anton, sans-serif; font-size: clamp(40px, 6vw, 74px); line-height: .95; margin: 0 0 14px; text-transform: uppercase; letter-spacing: .03em; }
+    .section-title p { margin: 0; color: #dfe7ff; font-size: 18px; line-height: 1.6; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      padding: 25px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 70px rgba(0,0,0,.18);
+    }
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      background: linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.06));
+      margin-bottom: 18px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 22px; }
+    .card p { margin: 0; color: #dce5ff; line-height: 1.65; }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 820px;
+      margin: 28px auto 0;
+    }
+    .timebox {
+      padding: 22px 14px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .timebox strong { display: block; font-family: Anton, sans-serif; font-size: clamp(36px, 6vw, 62px); line-height: 1; }
+    .timebox span { color: var(--muted); text-transform: uppercase; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+
+    .roadmap { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; counter-reset: phase; }
+    .phase { position: relative; overflow: hidden; }
+    .phase:before { counter-increment: phase; content: "0" counter(phase); position: absolute; right: 18px; top: 14px; font-family: Anton, sans-serif; font-size: 58px; color: rgba(255,255,255,.08); }
+    .phase ul { margin: 16px 0 0; padding-left: 18px; color: #dce5ff; line-height: 1.9; }
+
+    .chart-box {
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 30px 100px rgba(0,0,0,.26);
+    }
+    .chart-box iframe { width: 100%; height: 620px; border: 0; display: block; }
+
+    .match-tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .filter-pill {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.09);
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .filter-pill.active { background: linear-gradient(135deg, var(--gold), #ff8a00); color: #061044; border: 0; }
+    .schedule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .match-card {
+      padding: 20px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 60px rgba(0,0,0,.18);
+    }
+    .match-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+    .teams { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 18px; font-weight: 800; }
+    .vs { color: var(--gold); font-family: Anton, sans-serif; font-size: 25px; }
+    .venue { margin-top: 13px; color: #dce5ff; line-height: 1.5; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .stat-card {
+      padding: 24px 18px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-card strong { display: block; font-family: Anton, sans-serif; font-size: clamp(36px, 5vw, 58px); line-height: 1; }
+    .stat-card span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .live-note { max-width: 850px; margin: 22px auto 0; color: #dce5ff; line-height: 1.65; text-align: center; }
+
+    .footer-hero {
+      text-align: center;
+      padding: 54px 24px;
+      border-radius: 44px;
+      background:
+        linear-gradient(135deg, rgba(255,189,32,.18), rgba(0,166,81,.16), rgba(0,103,199,.18), rgba(227,24,55,.18)),
+        rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+    }
+    .footer-hero h2 { font-family: Anton, sans-serif; font-size: clamp(42px, 7vw, 86px); line-height: .95; margin: 0 0 18px; text-transform: uppercase; }
+    footer { padding: 34px 0 50px; color: #bfc9ef; text-align: center; font-size: 13px; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      background: #fff;
+      color: #07103f;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: .25s ease;
+      z-index: 99;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 920px) {
+      .hero-grid, .cards, .roadmap, .schedule-grid, .stats-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .mascot-card { transform: none; }
+      .countdown { grid-template-columns: repeat(2, 1fr); }
+      .chart-box iframe { height: 520px; }
+    }
+    @media (max-width: 520px) {
+      .hero { padding-top: 52px; }
+      .brand span { font-size: 22px; }
+      nav { height: 70px; }
+      .ca-box { grid-template-columns: 1fr; }
+      .countdown { grid-template-columns: 1fr 1fr; }
+      .stat-strip, .legacy-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ticker-tape" aria-hidden="true">
+    <div class="ticker-track">
+      <span>$futbol 2026</span><span>Solana Meme Coin</span><span>United by Football</span><span>Mexico | USA | Canada</span><span>Community Takeover Energy</span>
+      <span>$futbol 2026</span><span>Solana Meme Coin</span><span>United by Football</span><span>Mexico • USA • Canada</span><span>Community Takeover Energy</span>
+    </div>
+  </div>
+
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="#top">
+        <img src="./assets/logo.jpg" alt="$futbol profile picture" />
+        <span>$futbol</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#matches">Matches</a>
+        <a href="#stats">Live Stats</a>
+        <a href="#chart">Chart</a>
+        <a href="https://x.com/WorldCup_token" target="_blank" rel="noopener">X</a>
+       
+      </div>
+      <a class="btn primary" href="https://dexscreener.com/solana/soonpump" target="_blank" rel="noopener">View Chart</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Live on Solana</div>
+          <h1>futbol<br><span class="gradient-text">on Solana</span></h1>
+          <p class="lead">$futbol is a Live on Solana token built for the biggest global sports event on earth. Three host nations. Billions watching. One ticker.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="https://dexscreener.com/solana/soonpump" target="_blank" rel="noopener">Buy / Chart</a>
+           
+            <a class="btn red" href="https://x.com/WorldCup_token" target="_blank" rel="noopener">Follow X</a>
+          </div>
+          <div class="ca-box">
+            <div>
+              <small>Contract Address</small>
+              <div class="ca" id="ca">soonpump</div>
+            </div>
+            <button class="btn" onclick="copyCA()">Copy CA</button>
+          </div>
+        </div>
+        <div class="mascot-card">
+          <img src="./assets/logo.jpg" alt="$futbol logo mascot" />
+          <div class="stat-strip">
+            <div class="mini-stat"><span>Ticker</span>$futbol</div>
+            <div class="mini-stat"><span>Chain</span>Solana</div>
+            <div class="mini-stat"><span>CTO</span>Active</div>
+          </div>
+
+          <div class="legacy-box">
+            <h4>Legacy CA</h4>
+            <p>Original contract minted before the 2026 futbol hype cycle.</p>
+            <div class="legacy-grid">
+             
+              <div class="legacy-item"><strong>Migrated</strong><span>May 21, 2026</span></div>
+              <div class="legacy-item"><strong>Age</strong><span>Just Launched</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Built for the global football wave</h2>
+          <p>When the futbol hype starts, attention moves fast. $futbol is made to capture the culture, memes, national pride, and nonstop conversations around 2026.</p>
+        </div>
+        <div class="cards">
+          <div class="card"><div class="icon">🏆</div><h3>futbol Energy</h3><p>A clear, instantly understood ticker connected to one of the biggest global events of 2026.</p></div>
+          <div class="card"><div class="icon">🌎</div><h3>Global Community</h3><p>Mexico, United States, Canada, and fans from every country. Live on Solana energy from day one.</p></div>
+          <div class="card"><div class="icon">⚡</div><h3>Solana Speed</h3><p>Fast, simple, and accessible for meme coin traders who want clean entry and viral momentum.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Countdown to 2026</h2>
+          <p>The closer the tournament gets, the bigger the conversation becomes.</p>
+        </div>
+        <div class="countdown" id="countdown">
+          <div class="timebox"><strong id="days">--</strong><span>Days</span></div>
+          <div class="timebox"><strong id="hours">--</strong><span>Hours</span></div>
+          <div class="timebox"><strong id="minutes">--</strong><span>Minutes</span></div>
+          <div class="timebox"><strong id="seconds">--</strong><span>Seconds</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Roadmap</h2>
+          <p>Simple plan. Strong branding. Live on Solana execution.</p>
+        </div>
+        <div class="roadmap">
+          <div class="card phase"><h3>Kickoff</h3><ul><li>Refresh socials</li><li>Launch website</li><li>Grow Telegram</li></ul></div>
+          <div class="card phase"><h3>Momentum</h3><ul><li>Daily content</li><li>Meme competitions</li><li>Community raids</li></ul></div>
+          <div class="card phase"><h3>Expansion</h3><ul><li>Influencer pushes</li><li>Football fan outreach</li><li>Regional community groups</li></ul></div>
+          <div class="card phase"><h3>2026 Run</h3><ul><li>Matchday campaigns</li><li>Country-vs-country memes</li><li>Full tournament hype</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="matches">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Match schedule</h2>
+          <p>Follow the biggest 2026 fixtures and turn every matchday into a $futbol community event.</p>
+        </div>
+        <div class="match-tools">
+          <button class="filter-pill active" onclick="filterMatches('all', this)">All</button>
+          <button class="filter-pill" onclick="filterMatches('group', this)">Group Stage</button>
+          <button class="filter-pill" onclick="filterMatches('knockout', this)">Knockout</button>
+          <button class="filter-pill" onclick="filterMatches('final', this)">Final</button>
+        </div>
+        <div class="schedule-grid" id="scheduleGrid">
+          <div class="match-card" data-stage="group"><div class="match-meta"><span>Opening Match</span><span>Jun 11, 2026</span></div><div class="teams"><span>Mexico</span><span class="vs">VS</span><span>TBD</span></div><div class="venue">Estadio Azteca, Mexico City</div></div>
+          <div class="match-card" data-stage="group"><div class="match-meta"><span>Host Match</span><span>Jun 12, 2026</span></div><div class="teams"><span>Canada</span><span class="vs">VS</span><span>TBD</span></div><div class="venue">Toronto / Vancouver</div></div>
+          <div class="match-card" data-stage="group"><div class="match-meta"><span>Host Match</span><span>Jun 12, 2026</span></div><div class="teams"><span>USA</span><span class="vs">VS</span><span>TBD</span></div><div class="venue">United States</div></div>
+          <div class="match-card" data-stage="knockout"><div class="match-meta"><span>Round of 32</span><span>Jun 28–Jul 3</span></div><div class="teams"><span>TBD</span><span class="vs">VS</span><span>TBD</span></div><div class="venue">Knockout fixtures update after groups.</div></div>
+          <div class="match-card" data-stage="knockout"><div class="match-meta"><span>Semi Finals</span><span>Jul 14–15</span></div><div class="teams"><span>TBD</span><span class="vs">VS</span><span>TBD</span></div><div class="venue">Final four. Maximum hype.</div></div>
+          <div class="match-card" data-stage="final"><div class="match-meta"><span>Final</span><span>Jul 19, 2026</span></div><div class="teams"><span>TBD</span><span class="vs">VS</span><span>TBD</span></div><div class="venue">MetLife Stadium, New York/New Jersey</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stats">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Live tournament stats</h2>
+          <p>Designed for live football data once an API is connected.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><strong id="statMatches">104</strong><span>Total Matches</span></div>
+          <div class="stat-card"><strong id="statGoals">--</strong><span>Goals Scored</span></div>
+          <div class="stat-card"><strong id="statTeams">48</strong><span>Teams</span></div>
+          <div class="stat-card"><strong id="statNext">2026</strong><span>Next Kickoff</span></div>
+        </div>
+        <p class="live-note">These boxes are ready to connect to a football API for live scores, goals, group tables, top scorers, cards, and upcoming fixtures. Until then, they display launch placeholders.</p>
+      </div>
+    </section>
+
+    <section class="section" id="chart">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Live chart</h2>
+          <p>Track $futbol directly on Dexscreener after migration.</p>
+        </div>
+        <div class="chart-box">
+          <iframe
+            title="$futbol Dexscreener Chart"
+            src="https://dexscreener.com/solana/soonpump?embed=1&theme=dark"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap footer-hero">
+        <h2>United by football.<br><span class="gradient-text">Powered by memes.</span></h2>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">Join the $futbol community before the 2026 hype cycle fully kicks off.</p>
+        <div class="cta-row" style="justify-content:center;margin-bottom:0;">
+          <a class="btn primary" href="https://dexscreener.com/solana/soonpump" target="_blank" rel="noopener">Open  
+          <a class="btn red" href="https://x.com/WorldCup_token" target="_blank" rel="noopener">X</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>$futbol is a meme token. Nothing on this website is financial advice. Always do your own research.</p>
+  </footer>
+
+  <div class="toast" id="toast">Contract address copied</div>
+
+  <script>
+    const ca = "soonpump";
+    function copyCA() {
+      navigator.clipboard.writeText(ca);
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    function filterMatches(stage, button) {
+      document.querySelectorAll('.filter-pill').forEach(pill => pill.classList.remove('active'));
+      button.classList.add('active');
+      document.querySelectorAll('.match-card').forEach(card => {
+        card.style.display = stage === 'all' || card.dataset.stage === stage ? 'block' : 'none';
+      });
+    }
+
+    async function loadLiveTournamentStats() {
+      // Connect a football data API here once you have a provider/key.
+      // Example: fetch('/api/worldcup-stats').then(res => res.json()).then(updateStats)
+      // Keep API keys on your server, not inside this public HTML file.
+    }
+    loadLiveTournamentStats();
+
+    const target = new Date('2026-06-11T00:00:00-04:00').getTime();
+    function tick() {
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      document.getElementById('days').textContent = d;
+      document.getElementById('hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // Prevent embedded widgets from forcing page scroll on load
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    window.addEventListener('load', () => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  </script>
+</body>
+</html>
